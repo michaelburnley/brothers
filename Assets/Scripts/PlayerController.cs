@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -10,22 +10,22 @@ public class PlayerController : MonoBehaviour
         
     }
 
-	public float speed = 100;
-	public float max_speed = 200;
-	public float acceleration = 10;
-	public float deceleration = 5;
+	public float speed = 100f;
+	public float max_speed = 200f;
+	public float acceleration = 10f;
+	public float deceleration = 5f;
+
+	public float mod_speed = 0f;
+	public float mod_max_speed = 0f;
+	public float mod_acceleration = 0f;
+	public float mod_deceleration = 0f;
 
 	public Rigidbody2D rb;
 	public GameObject player_bullet;
 	public GameObject player_missile;
 	public GameObject player_shield;
 
-	private float mod_speed = 0;
-	private float mod_max_speed = 0;
-	private float mod_acceleration = 0;
-	private float mod_deceleration = 0;
-
-	Upgrade[] upgrades;
+	private List<Upgrade> upgrades = new List<Upgrade>();
 
 	public void Update()
 	{
@@ -48,5 +48,9 @@ public class PlayerController : MonoBehaviour
 		foreach(Upgrade up in upgrades) {
 			up.UpdateStats(this);
 		}
+	}
+
+	public void AddUpgrade(Upgrade up) {
+		upgrades.Add(up);
 	}
 }
