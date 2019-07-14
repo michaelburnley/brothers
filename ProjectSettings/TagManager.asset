@@ -8,6 +8,7 @@ TagManager:
   - background_sprite
   - bullet
   - projectile
+  - player
   layers:
   - Default
   - TransparentFX

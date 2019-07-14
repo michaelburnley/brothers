@@ -49,6 +49,11 @@ public class Player : MonoBehaviour
 			GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
 			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
 		}
+
+		if (Input.GetButtonDown("Fire2")) {
+			GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
+			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
+		}
 	}
 
 	public void UpdateStats() {
