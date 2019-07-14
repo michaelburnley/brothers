@@ -13,7 +13,6 @@ public class Upgrade {
 }
 
 public class Booster : Upgrade {
-    
     private float mod_speed = 10.5f;
 
     public override void UpdateStats(Player player) {

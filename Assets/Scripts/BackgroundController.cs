@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-  /// Scrolling speed
   public Vector2 scrolling_speed = new Vector2(0, 0);
-
-  /// Moving direction
   public Vector2 scrolling_direction = new Vector2(0, 0);
 
-  /// Movement should be applied to camera
   public bool isLinkedToCamera = false;
 
   void Update()
