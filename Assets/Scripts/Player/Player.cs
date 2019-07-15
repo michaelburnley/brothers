@@ -33,6 +33,13 @@ public class Player : MonoBehaviour
 	{
 		Movement();
 		Shoot();
+		CheckHealth();
+	}
+
+	public void CheckHealth() {
+		if (Globals.Health() <= 0) {
+			Globals.GameOver();
+		}
 	}
 
 	public void Movement() {
@@ -53,6 +60,13 @@ public class Player : MonoBehaviour
 		if (Input.GetButtonDown("Fire2")) {
 			GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
 			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.collider.tag == "projectile") {
+			BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
+			Globals.PlayerHealth(-bullet.damage);
 		}
 	}
 

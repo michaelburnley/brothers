@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
@@ -27,13 +27,13 @@ public class GameOver : MonoBehaviour
         anim.SetTrigger ("GameOver");
 
         // .. increment a timer to count up to restarting.
-        restartTimer += Time.deltaTime;
+        // restartTimer += Time.deltaTime;
 
-        // .. if it reaches the restart delay...
-        if(restartTimer >= restartDelay)
-        {
-            // .. then reload the currently loaded level.
-            Application.LoadLevel(Application.loadedLevel);
-        }
+        // // .. if it reaches the restart delay...
+        // if(restartTimer >= restartDelay)
+        // {
+        //     // .. then reload the currently loaded level.
+        //     Application.LoadLevel(Application.loadedLevel);
+        // }
     }
 }
