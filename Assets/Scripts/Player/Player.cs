@@ -21,9 +21,14 @@ public class Player : MonoBehaviour
 	public GameObject player_missile;
 	public GameObject player_shield;
 
-	private List<Upgrade> upgrades = new List<Upgrade>();
+	private void OnEnable() {
+		EventManager.StartListening(Events.message.UPGRADE_ADDED, UpdateStats);
+	}
 
-	// Start is called before the first frame update
+	private void OnDisable() {
+		EventManager.StopListening(Events.message.UPGRADE_ADDED, UpdateStats);		
+	}
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -53,13 +58,17 @@ public class Player : MonoBehaviour
 
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
-			GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
+			GameObject instantiatedBullet = Utilities.Create(player_bullet, this.gameObject);
+			// GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
+			// Physics2D.IgnoreCollision(instantiatedBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
-			GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
-			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
+			GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
+			// GameObject instantiatedMissile = Instantiate(player_missile, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
+			// Physics2D.IgnoreCollision(instantiatedMissile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+			instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
 		}
 	}
 
@@ -71,13 +80,10 @@ public class Player : MonoBehaviour
 	}
 
 	public void UpdateStats() {
+		List<Upgrade> upgrades = Globals.Upgrades();
 		foreach(Upgrade up in upgrades) {
 			up.UpdateStats(this);
 		}
-	}
-
-	public void AddUpgrade(Upgrade up) {
-		upgrades.Add(up);
 	}
 
 	void OnSceneLoaded() {
