@@ -19,3 +19,14 @@ public class Booster : Upgrade {
         player.mod_speed += mod_speed;
     }
 }
+
+
+    //	public float speed = 100f;
+	// public float max_speed = 200f;
+	// public float acceleration = 10f;
+	// public float deceleration = 5f;
+
+	// public float mod_speed = 0f;
+	// public float mod_max_speed = 0f;
+	// public float mod_acceleration = 0f;
+	// public float mod_deceleration = 0f;

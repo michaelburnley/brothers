@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
-
-    int total_scenes = SceneManager.sceneCountInBuildSettings;
+    private int total_scenes;
     private void OnEnable() {
         EventManager.StartListening(Events.message.NEXT_SCENE, SceneSwitcher);
     }
@@ -15,9 +14,15 @@ public class SceneSwitch : MonoBehaviour
         EventManager.StopListening(Events.message.NEXT_SCENE, SceneSwitcher);
     }
 
+    private void Awake() {
+        total_scenes = SceneManager.sceneCountInBuildSettings;
+    }
+
     private void SceneSwitcher () {
         int scene = Globals.Scene();
-        if ((scene + 1) < total_scenes) {
+        Debug.Log(total_scenes);
+        if ((scene + 1) <= total_scenes) {
+            Debug.Log("Loading Scene: " + scene);
             SceneManager.LoadScene(scene);
         }
     }

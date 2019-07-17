@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
 	    float v = Input.GetAxis("Vertical");
 
 	    Vector3 tempVect = new Vector3(h, v, 0);
+
 	    tempVect = tempVect.normalized * speed * Time.deltaTime;
 	    rb.MovePosition(rb.transform.position + tempVect);
 	}
@@ -59,16 +60,12 @@ public class Player : MonoBehaviour
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject instantiatedBullet = Utilities.Create(player_bullet, this.gameObject);
-			// GameObject instantiatedBullet = Instantiate(player_bullet, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
-			// Physics2D.IgnoreCollision(instantiatedBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
+			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 20, 0);
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
 			GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
-			// GameObject instantiatedMissile = Instantiate(player_missile, (transform.position + new Vector3(0, 1, 0)), transform.rotation);
-			// Physics2D.IgnoreCollision(instantiatedMissile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-			instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
+			instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 20, 0);
 		}
 	}
 

@@ -534,7 +534,6 @@ GameObject:
   - component: {fileID: 343647572}
   - component: {fileID: 343647575}
   - component: {fileID: 343647574}
-  - component: {fileID: 343647573}
   - component: {fileID: 343647576}
   m_Layer: 11
   m_Name: enemy
@@ -605,25 +604,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &343647573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 343647570}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e6b8c8f26851e438f7208495da2439, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  bullet_speed: 5
-  score: 10
-  health: 1
-  bullet_occurence: 2
-  projectile: {fileID: 291099321}
-  shield: {fileID: 0}
 --- !u!50 &343647574
 Rigidbody2D:
   serializedVersion: 4
@@ -690,6 +670,7 @@ MonoBehaviour:
   bullet_occurence: 1
   projectile: {fileID: 291099321}
   shield: {fileID: 0}
+  direction: -10
 --- !u!1001 &375866215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2922,7 +2903,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745986687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.69, y: 5.2, z: 2}
+  m_LocalPosition: {x: 0.03, y: -0.51, z: 2}
   m_LocalScale: {x: 3.529618, y: 3.529618, z: 1}
   m_Children: []
   m_Father: {fileID: 1288075343}
@@ -3009,7 +2990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa46555284bb5542bdaa5c7e6f87030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 30
   max_speed: 200
   acceleration: 10
   deceleration: 5

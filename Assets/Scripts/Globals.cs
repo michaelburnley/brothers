@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class Globals
 {
 
     static private int score = 0;
     static private int playerHealth = 1;
+    static private int scene = 0;
     static private List<Upgrade> upgrades = new List<Upgrade>();
 
-    static private int scene = 0;
 
     static public int Score() {
         return score;
@@ -43,10 +44,17 @@ public static class Globals
 
     static public void NextScene() {
         scene++;
+        Debug.Log(scene);
         EventManager.TriggerEvent(Events.message.NEXT_SCENE);
     }
 
     static public void GameOver() {
         EventManager.TriggerEvent(Events.message.GAME_OVER);
+    }
+
+    static public void ExitGame() {
+        EventManager.TriggerEvent(Events.message.EXIT_GAME);
+        Debug.Log("Exiting game.");
+        Application.Quit();
     }
 }
