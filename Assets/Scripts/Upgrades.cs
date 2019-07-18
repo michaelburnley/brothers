@@ -20,6 +20,17 @@ public class Booster : Upgrade {
     }
 }
 
+// Activates mode where bullets get angular knockback
+public class Hate : Upgrade {
+    private float mod_speed = 10.5f;
+    private float mod_bullet_speed = 10.5f;
+    
+    public override void UpdateStats(Player player) {
+        player.mod_speed = mod_speed;
+    }
+
+}
+
 
     //	public float speed = 100f;
 	// public float max_speed = 200f;

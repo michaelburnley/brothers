@@ -10,5 +10,6 @@ public static class Events {
         NEXT_SCENE,
         UPGRADE_ADDED,
         EXIT_GAME,
+        COUNTDOWN,
     };
 }

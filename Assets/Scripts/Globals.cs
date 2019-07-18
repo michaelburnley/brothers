@@ -9,6 +9,7 @@ public static class Globals
     static private int playerHealth = 1;
     static private int scene = 0;
     static private List<Upgrade> upgrades = new List<Upgrade>();
+    static private bool countdown_active = false;
 
 
     static public int Score() {
@@ -26,6 +27,7 @@ public static class Globals
     static public int Scene() {
         return scene;
     }
+
 
     static public void ChangeScore(int scoreChange) {
         score += scoreChange;
@@ -50,6 +52,11 @@ public static class Globals
 
     static public void GameOver() {
         EventManager.TriggerEvent(Events.message.GAME_OVER);
+    }
+
+    static public void CountDown() {
+        countdown_active = true;
+        EventManager.TriggerEvent(Events.message.COUNTDOWN);
     }
 
     static public void ExitGame() {

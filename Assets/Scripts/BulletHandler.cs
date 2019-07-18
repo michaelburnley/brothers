@@ -5,12 +5,21 @@ using UnityEngine;
 public class BulletHandler : MonoBehaviour
 {
     public int damage;
+    public float speed;
+	public float cooldown;
+    SpriteRenderer sprite;
+    Animator anim;
     
     void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.collider.tag == "barrier") {
-    		Debug.Log("Destroyed bullet.");
-    		Destroy(this.gameObject);
-    	}
+        Destroy(this.gameObject);
+        // if (collision.collider.tag == "barrier") {
+    	// 	Debug.Log("Destroyed bullet.");
+    	// 	Destroy(this.gameObject);
+    	// }
+        // TODO: Possibly add projectile collission detection
+        // if (collision.collider.tag == "projectile") {
+
+        // }
     }
 
 }

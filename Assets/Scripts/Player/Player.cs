@@ -18,7 +18,10 @@ public class Player : MonoBehaviour
 
 	private Rigidbody2D rb;
 	public GameObject player_bullet;
+	public float bullet_speed;
 	public GameObject player_missile;
+	public int missile_qty;
+	private float next_fire;
 	public GameObject player_shield;
 
 	private void OnEnable() {
@@ -60,12 +63,19 @@ public class Player : MonoBehaviour
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject instantiatedBullet = Utilities.Create(player_bullet, this.gameObject);
-			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 20, 0);
+			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().speed;
+			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed, 0);
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
-			GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
-			instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 20, 0);
+			if (missile_qty > 0 && Time.time > next_fire) {
+				float cooldown = player_missile.GetComponent<BulletHandler>().cooldown;
+				next_fire = Time.time + cooldown;
+				missile_qty--;
+				GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
+				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().speed;
+				instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed * 10, 0);
+			}
 		}
 	}
 
