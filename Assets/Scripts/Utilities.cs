@@ -13,4 +13,12 @@ static public class Utilities
         return temp;
     }
 
+    // static public GameObject Serialize(GameObject obj) {
+
+    // }
+
+    // static public GameObject Deserialize(GameObject obj) {
+        
+    // }
+
 }
