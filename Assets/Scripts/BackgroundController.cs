@@ -4,25 +4,39 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-  public Vector2 scrolling_speed = new Vector2(0, 0);
-  public Vector2 scrolling_direction = new Vector2(0, 0);
+  public float scrolling_speed;
 
-  public bool isLinkedToCamera = false;
+  private Vector2 movement;
+  public float backgroundPosition;
+  private Rigidbody2D rb2d;
+
+	private void OnEnable() {
+		EventManager.StartListening(Events.message.GAME_OVER, StopMovement);
+	}
+
+	private void OnDisable() {
+		EventManager.StopListening(Events.message.GAME_OVER, StopMovement);		
+	}
+
+  private void Start() {
+        rb2d = GetComponent<Rigidbody2D>();
+        rb2d.velocity = new Vector2(0, -scrolling_speed);
+  }
 
   void Update()
   {
-    // Movement
-    Vector2 movement = new Vector2(
-      scrolling_speed.x * scrolling_direction.x,
-      scrolling_speed.y * scrolling_direction.y);
-
-    movement *= Time.deltaTime;
-    transform.Translate(movement);
-
-    // Move the camera
-    if (isLinkedToCamera)
-    {
-      Camera.main.transform.Translate(movement);
+    if (transform.position.y < -backgroundPosition) {
+      RepositionBackground();
     }
+  }
+
+  void StopMovement() {
+    Vector2 pause = new Vector2(0, 0);
+    rb2d.velocity = pause;
+  }
+
+  void RepositionBackground() {
+    Vector2 backgroundOffset = new Vector2(0, 190.5f);
+    transform.position =  (Vector2) transform.position + backgroundOffset;
   }
 }

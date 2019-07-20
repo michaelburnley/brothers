@@ -18,22 +18,10 @@ public class GameOver : MonoBehaviour
 
     void Awake ()
     {
-        // Set up the reference.
         anim = GetComponent<Animator>();
     }
 
     private void _GameOver() {
-        // ... tell the animator the game is over.
-        anim.SetTrigger ("GameOver");
-
-        // .. increment a timer to count up to restarting.
-        // restartTimer += Time.deltaTime;
-
-        // // .. if it reaches the restart delay...
-        // if(restartTimer >= restartDelay)
-        // {
-        //     // .. then reload the currently loaded level.
-        //     Application.LoadLevel(Application.loadedLevel);
-        // }
+        anim.SetTrigger("GameOver");
     }
 }
