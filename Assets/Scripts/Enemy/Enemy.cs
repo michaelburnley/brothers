@@ -6,33 +6,51 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     public EnemyData enemyData;
-    private int health;
-    private float backgroundSpeed;
+    protected int health;
+    protected float backgroundSpeed;
 
-    private float timer;
+    protected float timer;
+    protected bool isVisible = false;
+
+    protected Rigidbody2D rb;
+
+	private void OnEnable() {
+		EventManager.StartListening(Events.message.GAME_OVER, StopShooting);
+	}
+
+	private void OnDisable() {
+		EventManager.StopListening(Events.message.GAME_OVER, StopShooting);		
+	}
 
     private void Awake() {
         backgroundSpeed = GameObject.Find("Background (far)").GetComponent<BackgroundController>().scrolling_speed;
         health = enemyData.Health;
+        rb = this.GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = enemyData.Icon;
     }
 
     void Update()
     {
         Movement();
-        Shoot();
+        if (isVisible) {
+            Shoot();
+        }
         CheckHealth();
     }
 
+    private void OnBecameVisible() {
+        isVisible = true;
+    }
+
+
     protected void CheckHealth() {
-        if (enemyData.Health <= 0) {
+        if (health <= 0) {
             Destroy(this.gameObject);
             Globals.ChangeScore(enemyData.Score);
         }
     }
 
     public virtual void Movement() {
-        Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
         Vector3 tempVect = new Vector3(0, -10, 0);
 	    tempVect = tempVect.normalized * enemyData.Speed * Time.deltaTime;
 	    rb.MovePosition(rb.transform.position + tempVect);
@@ -57,7 +75,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void Shoot() {
+    public virtual void Shoot() {
         timer += Time.deltaTime;
         if (timer > enemyData.BulletOccurence) {
             GameObject instantiatedProjectile = Instantiate(enemyData.Projectile, (transform.position + new Vector3(0, -2, 0)), transform.rotation);
@@ -65,6 +83,11 @@ public class Enemy : MonoBehaviour
 			instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -10, 0);
             timer = 0;
         }
+    }
+
+    private void StopShooting() {
+        Debug.Log("Stopping shooting.");
+        timer = 0f;
     }
 
     private void OnDestroy() {

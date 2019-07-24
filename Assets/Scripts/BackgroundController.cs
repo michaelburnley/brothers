@@ -8,7 +8,7 @@ public class BackgroundController : MonoBehaviour
 
   private Vector2 movement;
   public float backgroundPosition;
-  private Rigidbody2D rb2d;
+  private Rigidbody2D rb;
 
 	private void OnEnable() {
 		EventManager.StartListening(Events.message.GAME_OVER, StopMovement);
@@ -19,8 +19,8 @@ public class BackgroundController : MonoBehaviour
 	}
 
   private void Start() {
-        rb2d = GetComponent<Rigidbody2D>();
-        rb2d.velocity = new Vector2(0, -scrolling_speed);
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(0, -scrolling_speed);
   }
 
   void Update()
@@ -32,7 +32,7 @@ public class BackgroundController : MonoBehaviour
 
   void StopMovement() {
     Vector2 pause = new Vector2(0, 0);
-    rb2d.velocity = pause;
+    rb.velocity = pause;
   }
 
   void RepositionBackground() {

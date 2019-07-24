@@ -81,10 +81,8 @@ public class Player : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "projectile") {
-			Debug.Log("hit");
 			BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
 			int damage = bullet.GetBulletDamage();
-			Debug.Log(damage);
 			Globals.PlayerHealth(-damage);
 		}
 	}
