@@ -63,17 +63,17 @@ public class Player : MonoBehaviour
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject instantiatedBullet = Utilities.Create(player_bullet, this.gameObject);
-			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().speed;
+			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().GetSpeed();
 			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed, 0);
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
 			if (missile_qty > 0 && Time.time > next_fire) {
-				float cooldown = player_missile.GetComponent<BulletHandler>().cooldown;
+				float cooldown = player_missile.GetComponent<BulletHandler>().GetCooldown();
 				next_fire = Time.time + cooldown;
 				missile_qty--;
 				GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
-				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().speed;
+				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().GetSpeed();
 				instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed * 10, 0);
 			}
 		}
@@ -81,15 +81,18 @@ public class Player : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "projectile") {
+			Debug.Log("hit");
 			BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
-			Globals.PlayerHealth(-bullet.damage);
+			int damage = bullet.GetBulletDamage();
+			Debug.Log(damage);
+			Globals.PlayerHealth(-damage);
 		}
 	}
 
 	public void UpdateStats() {
-		List<Upgrade> upgrades = Globals.Upgrades();
-		foreach(Upgrade up in upgrades) {
-			up.UpdateStats(this);
+		List<UpgradeData> upgrades = Globals.Upgrades();
+		foreach(UpgradeData up in upgrades) {
+			// up.UpdateStats(this);
 		}
 	}
 

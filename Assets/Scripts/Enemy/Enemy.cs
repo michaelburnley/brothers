@@ -4,27 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
-    public float bullet_speed;
-    public int score;
-    public float health;
-    public float bullet_occurence;
-    private Vector3 bullet_direction;
+    [SerializeField]
+    public EnemyData enemyData;
+    private int health;
+    private float backgroundSpeed;
 
     private float timer;
 
-    public GameObject projectile;
-    public GameObject shield;
-
-    private void OnEnable() {
-    }
-
-    private void OnDisable() {
-    }
-
-    void Start()
-    {
-        
+    private void Awake() {
+        backgroundSpeed = GameObject.Find("Background (far)").GetComponent<BackgroundController>().scrolling_speed;
+        health = enemyData.Health;
+        GetComponent<SpriteRenderer>().sprite = enemyData.Icon;
     }
 
     void Update()
@@ -35,16 +25,16 @@ public class Enemy : MonoBehaviour
     }
 
     protected void CheckHealth() {
-        if (health <= 0) {
+        if (enemyData.Health <= 0) {
             Destroy(this.gameObject);
-            Globals.ChangeScore(score);
+            Globals.ChangeScore(enemyData.Score);
         }
     }
 
     public virtual void Movement() {
         Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
         Vector3 tempVect = new Vector3(0, -10, 0);
-	    tempVect = tempVect.normalized * speed * Time.deltaTime;
+	    tempVect = tempVect.normalized * enemyData.Speed * Time.deltaTime;
 	    rb.MovePosition(rb.transform.position + tempVect);
     }
 
@@ -57,7 +47,8 @@ public class Enemy : MonoBehaviour
 
         if (collision.collider.tag == "projectile") {
             BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
-            health -= bullet.damage;
+            int damage = bullet.GetBulletDamage();
+            health -= damage;
             Destroy(collision.collider.gameObject);
         }
 
@@ -68,8 +59,8 @@ public class Enemy : MonoBehaviour
 
     protected void Shoot() {
         timer += Time.deltaTime;
-        if (timer > bullet_occurence) {
-            GameObject instantiatedProjectile = Instantiate(projectile, (transform.position + new Vector3(0, -2, 0)), transform.rotation);
+        if (timer > enemyData.BulletOccurence) {
+            GameObject instantiatedProjectile = Instantiate(enemyData.Projectile, (transform.position + new Vector3(0, -2, 0)), transform.rotation);
 			instantiatedProjectile.GetComponent<SpriteRenderer>().flipY = true;
 			instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -10, 0);
             timer = 0;

@@ -8,7 +8,7 @@ public static class Globals
     static private int score = 0;
     static private int playerHealth = 1;
     static private int scene = 0;
-    static private List<Upgrade> upgrades = new List<Upgrade>();
+    static private List<UpgradeData> upgrades = new List<UpgradeData>();
     static private bool countdown_active = false;
 
 
@@ -20,7 +20,7 @@ public static class Globals
         return playerHealth;
     }
 
-    static public List<Upgrade> Upgrades() {
+    static public List<UpgradeData> Upgrades() {
         return upgrades;
     }
 
@@ -34,7 +34,7 @@ public static class Globals
         EventManager.TriggerEvent(Events.message.CHANGE_SCORE);
     }
 
-    static public void AddUpgrade(Upgrade up) {
+    static public void AddUpgrade(UpgradeData up) {
         upgrades.Add(up);
         EventManager.TriggerEvent(Events.message.UPGRADE_ADDED);
     }

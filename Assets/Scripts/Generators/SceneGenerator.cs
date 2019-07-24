@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class SceneObject {
         public float position_x;
@@ -45,6 +46,7 @@ public class Scene {
 
 public class SceneGenerator
 {
+    public string levelName;
     private GameObject foreground = GameObject.Find("Foreground");
     private GameObject background_far = GameObject.Find("Background (far)");
     private GameObject middleground = GameObject.Find("Middleground");
@@ -69,5 +71,20 @@ public class SceneGenerator
         objects.Add(GenerateObjects(low_visibility));
         objects.Add(GenerateObjects(background_close));
         return JsonUtility.ToJson(objects);
+    }
+
+    public void WriteFile() {
+        string path = "Assets/Resources/" + levelName + ".json";
+        string json_file = GenerateJSON();
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.Write(json_file);
+        writer.Close();
+    }
+
+    public void ReadString() {
+        string path = "Assets/Resources/" + levelName + ".json";
+        StreamReader reader = new StreamReader(path);
+        Debug.Log(reader.ReadToEnd());
+        reader.Close();
     }
 }
