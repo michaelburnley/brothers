@@ -4,26 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Upgrade : MonoBehaviour, IPointerEnterHandler
+public class Upgrade : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     [SerializeField]
     private UpgradeData upgradeData; // 1
-    // Start is called before the first frame update
+
     private Text upgradeText;
     void Start()
     {
         upgradeText = GameObject.Find("UpgradeText").GetComponent<Text>();
         GetComponent<Image>().sprite = upgradeData.Icon;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Debug.Log(upgradeData.Description);
-    }
-
-    public virtual void UpdateStats(Player player) {
-        
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData) {
@@ -36,8 +26,8 @@ public class Upgrade : MonoBehaviour, IPointerEnterHandler
         upgradeText.text = "";
     }
 
-    // private void OnMouseDown() {
-    //     Globals.AddUpgrade(upgradeData);
-    //     Globals.NextScene();
-    // }
+    public void OnPointerClick(PointerEventData pointerEventData) {
+        Globals.AddUpgrade(upgradeData);
+        Debug.Log("Added upgrade.");
+    }
 }

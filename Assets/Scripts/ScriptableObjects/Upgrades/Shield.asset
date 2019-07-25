@@ -17,3 +17,5 @@ MonoBehaviour:
   rarity: 10
   icon: {fileID: 0}
   description: Takes damage in place of you. Looks cool.
+  upgradeType: 2
+  upgradeValue: 10

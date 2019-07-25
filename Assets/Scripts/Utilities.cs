@@ -12,4 +12,11 @@ static public class Utilities
         return temp;
     }
 
+    static public GameObject Create(GameObject created_obj, GameObject parent_obj, Vector3 path) {
+        GameObject temp = GameObject.Instantiate(created_obj, parent_obj.transform.position, parent_obj.transform.rotation);
+        BulletHandler script = temp.GetComponent<BulletHandler>();
+        Physics2D.IgnoreCollision(temp.GetComponent<Collider2D>(), parent_obj.GetComponent<Collider2D>());
+        return temp;
+    }
+
 }

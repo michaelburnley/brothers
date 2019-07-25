@@ -17,3 +17,5 @@ MonoBehaviour:
   rarity: 10
   icon: {fileID: 0}
   description: Makes you faster. What do you want from me.
+  upgradeType: 0
+  upgradeValue: 10

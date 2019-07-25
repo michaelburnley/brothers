@@ -90,7 +90,24 @@ public class Player : MonoBehaviour
 	public void UpdateStats() {
 		List<UpgradeData> upgrades = Globals.Upgrades();
 		foreach(UpgradeData up in upgrades) {
-			// up.UpdateStats(this);
+			float mod = up.UpgradeValue;
+			switch (up.ModType) {
+				case UpgradeType.SPEED:
+					//assign to correct variable
+					break;
+				case UpgradeType.HEALTH:
+					//assign to correct variable
+					break;
+				case UpgradeType.SHIELD:
+					//assign to correct variable
+					break;
+				case UpgradeType.FIRE_RATE:
+					//assign to correct variable
+					break;
+				default:
+					//assign to correct variable
+					break;
+			}
 		}
 	}
 
