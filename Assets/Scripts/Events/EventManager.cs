@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour 
 {
- private Dictionary <Events.message, UnityEvent> eventDictionary;
+ private Dictionary <Message, UnityEvent> eventDictionary;
 
     private static EventManager eventManager;
 
@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
 
                 if (!eventManager)
                 {
-                    Debug.LogError ("There needs to be one active EventManger script on a GameObject in your scene.");
+                    Debug.LogError ("There needs to be one active EventManager script on a GameObject in your scene.");
                 }
                 else
                 {
@@ -35,11 +35,11 @@ public class EventManager : MonoBehaviour
     {
         if (eventDictionary == null)
         {
-            eventDictionary = new Dictionary<Events.message, UnityEvent>();
+            eventDictionary = new Dictionary<Message, UnityEvent>();
         }
     }
 
-    public static void StartListening (Events.message eventName, UnityAction listener)
+    public static void StartListening (Message eventName, UnityAction listener)
     {
         UnityEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
@@ -54,7 +54,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void StopListening (Events.message eventName, UnityAction listener)
+    public static void StopListening (Message eventName, UnityAction listener)
     {
         if (eventManager == null) return;
         UnityEvent thisEvent = null;
@@ -64,7 +64,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void TriggerEvent (Events.message eventName)
+    public static void TriggerEvent (Message eventName)
     {
         UnityEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))

@@ -8,22 +8,36 @@ public class EnemyData : ScriptableObject {
 
     [SerializeField]
     private string enemy_name;
+
     [SerializeField]
     private Sprite icon;
+
     [SerializeField]
     private int health;
+
     [SerializeField]
     private float speed;
+
     [SerializeField]
     private int score;
+
     [SerializeField]
     private float bullet_speed;
+
     [SerializeField]
     private float bullet_occurence;
+
     [SerializeField]
     private GameObject projectile;
+
     [SerializeField]
     private GameObject shield;
+
+    [SerializeField]
+    private float direction_x = 0f;
+
+    [SerializeField]
+    private float direction_y = -10f;
 
 
     public GameObject Projectile {
@@ -77,4 +91,16 @@ public class EnemyData : ScriptableObject {
             return health;
         }
     } 
+
+    public float DirectionX {
+        get {
+            return direction_x;
+        }
+    }
+
+    public float DirectionY {
+        get {
+            return direction_y;
+        }
+    }
 }

@@ -9,11 +9,11 @@ public class GameOver : MonoBehaviour
     float restartTimer;                     // Timer to count up to restarting the level
 
     private void OnEnable() {
-        EventManager.StartListening(Events.message.GAME_OVER, _GameOver);
+        EventManager.StartListening(Message.GAME_OVER, _GameOver);
     }
 
     private void OnDisable() {
-        EventManager.StopListening(Events.message.GAME_OVER, _GameOver);
+        EventManager.StopListening(Message.GAME_OVER, _GameOver);
     }
 
     void Awake ()

@@ -1,6 +1,6 @@
 public class Score : UIText {
     
     private void Update() {
-        textComponent.text = title + ": " + Globals.Score();
+        textComponent.text = title + ": " + Globals.Score;
     }
 }

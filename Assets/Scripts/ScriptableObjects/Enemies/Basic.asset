@@ -22,3 +22,5 @@ MonoBehaviour:
   projectile: {fileID: 4791179771934174773, guid: 2ed3755c00d559847bbd2a7356f3848e,
     type: 3}
   shield: {fileID: 0}
+  direction_x: 0
+  direction_y: -10

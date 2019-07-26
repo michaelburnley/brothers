@@ -7,11 +7,11 @@ public class SceneSwitch : MonoBehaviour
 {
     private int total_scenes;
     private void OnEnable() {
-        EventManager.StartListening(Events.message.NEXT_SCENE, SceneSwitcher);
+        EventManager.StartListening(Message.NEXT_SCENE, SceneSwitcher);
     }
 
     private void OnDisable() {
-        EventManager.StopListening(Events.message.NEXT_SCENE, SceneSwitcher);
+        EventManager.StopListening(Message.NEXT_SCENE, SceneSwitcher);
     }
 
     private void Awake() {
@@ -19,7 +19,7 @@ public class SceneSwitch : MonoBehaviour
     }
 
     private void SceneSwitcher () {
-        int scene = Globals.Scene();
+        int scene = Globals.Scene;
         Debug.Log(total_scenes);
         if ((scene + 1) <= total_scenes) {
             Debug.Log("Loading Scene: " + scene);

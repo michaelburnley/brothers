@@ -7,12 +7,12 @@ using UnityEngine.EventSystems;
 public class Upgrade : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     [SerializeField]
-    private UpgradeData upgradeData; // 1
-
+    private UpgradeData upgradeData;
+    [SerializeField]
     private Text upgradeText;
+
     void Start()
     {
-        upgradeText = GameObject.Find("UpgradeText").GetComponent<Text>();
         GetComponent<Image>().sprite = upgradeData.Icon;
     }
 

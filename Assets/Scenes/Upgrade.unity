@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeData: {fileID: 11400000, guid: ab58c3dc7fe33aa4ba0f19020fcfbca8, type: 2}
+  upgradeText: {fileID: 1576621545}
 --- !u!114 &420585385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeData: {fileID: 11400000, guid: 2cb9250b15119ca4abe4de3c7839de9c, type: 2}
+  upgradeText: {fileID: 1576621545}
 --- !u!114 &576184027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeData: {fileID: 11400000, guid: ab58c3dc7fe33aa4ba0f19020fcfbca8, type: 2}
+  upgradeText: {fileID: 1576621545}
 --- !u!1 &700902636
 GameObject:
   m_ObjectHideFlags: 0

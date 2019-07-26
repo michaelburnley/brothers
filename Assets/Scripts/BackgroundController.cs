@@ -4,39 +4,42 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-  public float scrolling_speed;
+  [SerializeField]
+  public BackgroundData backgroundData;
 
-  private Vector2 movement;
-  public float backgroundPosition;
   private Rigidbody2D rb;
 
 	private void OnEnable() {
-		EventManager.StartListening(Events.message.GAME_OVER, StopMovement);
+		EventManager.StartListening(Message.GAME_OVER, StopMovement);
 	}
 
 	private void OnDisable() {
-		EventManager.StopListening(Events.message.GAME_OVER, StopMovement);		
+		EventManager.StopListening(Message.GAME_OVER, StopMovement);		
 	}
 
+  private void Awake() {
+    rb = GetComponent<Rigidbody2D>();
+    GetComponent<SpriteRenderer>().sprite = backgroundData.Background;
+  }
+
   private void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0, -scrolling_speed);
+    rb.velocity = new Vector2(0, -backgroundData.Speed);
+    Globals.BackgroundSpeed = backgroundData.Speed;
   }
 
   void Update()
   {
-    if (transform.position.y < -backgroundPosition) {
+    if (transform.position.y < -backgroundData.Position) {
       RepositionBackground();
     }
   }
 
   void StopMovement() {
-    Vector2 pause = new Vector2(0, 0);
-    rb.velocity = pause;
+    rb.velocity = Vector2.zero;
   }
 
   void RepositionBackground() {
-    Vector2 backgroundOffset = new Vector2(0, 190.5f);
+    Vector2 backgroundOffset = new Vector2(0, backgroundData.Offset);
     transform.position =  (Vector2) transform.position + backgroundOffset;
   }
 }

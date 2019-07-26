@@ -10,57 +10,75 @@ public static class Globals
     static private int scene = 0;
     static private List<UpgradeData> upgrades = new List<UpgradeData>();
     static private bool countdown_active = false;
+    static private float background_speed;
 
 
-    static public int Score() {
-        return score;
+    static public int Score {
+        get {
+            return score;
+        }
     }
 
-    static public int Health() {
-        return playerHealth;
+    static public int Health {
+        get {
+            return playerHealth;
+        }
     }
 
-    static public List<UpgradeData> Upgrades() {
-        return upgrades;
+    static public List<UpgradeData> Upgrades {
+        get {
+            return upgrades;
+        }
     }
 
-    static public int Scene() {
-        return scene;
+    static public int Scene {
+        get {
+            return scene;
+        }
     }
 
+    static public float BackgroundSpeed {
+        set {
+            background_speed = value;
+        }
+
+        get {
+            return background_speed;
+        }
+    }
 
     static public void ChangeScore(int scoreChange) {
         score += scoreChange;
-        EventManager.TriggerEvent(Events.message.CHANGE_SCORE);
+        EventManager.TriggerEvent(Message.CHANGE_SCORE);
     }
 
     static public void AddUpgrade(UpgradeData up) {
         upgrades.Add(up);
-        EventManager.TriggerEvent(Events.message.UPGRADE_ADDED);
+        EventManager.TriggerEvent(Message.UPGRADE_ADDED);
     }
 
     static public void PlayerHealth(int healthChange) {
         playerHealth += healthChange;
-        EventManager.TriggerEvent(Events.message.CHANGE_HEALTH);
+        EventManager.TriggerEvent(Message.CHANGE_HEALTH);
     }
 
     static public void NextScene() {
         scene++;
         Debug.Log(scene);
-        EventManager.TriggerEvent(Events.message.NEXT_SCENE);
+        EventManager.TriggerEvent(Message.NEXT_SCENE);
     }
 
     static public void GameOver() {
-        EventManager.TriggerEvent(Events.message.GAME_OVER);
+        EventManager.TriggerEvent(Message.GAME_OVER);
     }
 
     static public void CountDown() {
         countdown_active = true;
-        EventManager.TriggerEvent(Events.message.COUNTDOWN);
+        EventManager.TriggerEvent(Message.COUNTDOWN);
     }
 
     static public void ExitGame() {
-        EventManager.TriggerEvent(Events.message.EXIT_GAME);
+        EventManager.TriggerEvent(Message.EXIT_GAME);
         Debug.Log("Exiting game.");
         Application.Quit();
     }

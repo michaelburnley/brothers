@@ -15,17 +15,17 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
 
 	private void OnEnable() {
-		EventManager.StartListening(Events.message.GAME_OVER, StopShooting);
+		EventManager.StartListening(Message.GAME_OVER, StopShooting);
 	}
 
 	private void OnDisable() {
-		EventManager.StopListening(Events.message.GAME_OVER, StopShooting);		
+		EventManager.StopListening(Message.GAME_OVER, StopShooting);		
 	}
 
     private void Awake() {
-        backgroundSpeed = GameObject.Find("Background (far)").GetComponent<BackgroundController>().scrolling_speed;
+        backgroundSpeed = Globals.BackgroundSpeed;
         health = enemyData.Health;
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = enemyData.Icon;
     }
 
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
     }
 
     public virtual void Movement() {
-        Vector3 tempVect = new Vector3(0, -10, 0);
+        Vector3 tempVect = new Vector3(enemyData.DirectionX, enemyData.DirectionY, 0);
 	    tempVect = tempVect.normalized * enemyData.Speed * Time.deltaTime;
 	    rb.MovePosition(rb.transform.position + tempVect);
     }
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         if (timer > enemyData.BulletOccurence) {
             GameObject instantiatedProjectile = Instantiate(enemyData.Projectile, (transform.position + new Vector3(0, -2, 0)), transform.rotation);
 			instantiatedProjectile.GetComponent<SpriteRenderer>().flipY = true;
-			instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -10, 0);
+			instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, enemyData.DirectionY, 0);
             timer = 0;
         }
     }

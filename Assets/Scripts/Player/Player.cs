@@ -25,11 +25,11 @@ public class Player : MonoBehaviour
 	public GameObject player_shield;
 
 	private void OnEnable() {
-		EventManager.StartListening(Events.message.UPGRADE_ADDED, UpdateStats);
+		EventManager.StartListening(Message.UPGRADE_ADDED, UpdateStats);
 	}
 
 	private void OnDisable() {
-		EventManager.StopListening(Events.message.UPGRADE_ADDED, UpdateStats);		
+		EventManager.StopListening(Message.UPGRADE_ADDED, UpdateStats);		
 	}
 
     void Start()
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 	}
 
 	public void CheckHealth() {
-		if (Globals.Health() <= 0) {
+		if (Globals.Health <= 0) {
 			Globals.GameOver();
 		}
 	}
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 	}
 
 	public void UpdateStats() {
-		List<UpgradeData> upgrades = Globals.Upgrades();
+		List<UpgradeData> upgrades = Globals.Upgrades;
 		foreach(UpgradeData up in upgrades) {
 			float mod = up.UpgradeValue;
 			switch (up.ModType) {
