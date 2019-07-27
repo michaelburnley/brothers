@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Booster
   cost: 10
   rarity: 10
-  icon: {fileID: 0}
+  icon: {fileID: 21300006, guid: c8260d15cb31d3d49a251f7cdb4d1777, type: 3}
   description: Makes you faster. What do you want from me.
   upgradeType: 0
   upgradeValue: 10

@@ -10,7 +10,7 @@ public static class Globals
     static private List<UpgradeData> upgrades = new List<UpgradeData>();
     static private bool countdown_active = false;
     static private float background_speed;
-    static private int playerHealth = 1 + upgrades.Count;
+    static private int playerHealth = 1;
     static private int shield = 0;
 
 
@@ -23,6 +23,16 @@ public static class Globals
     static public int Health {
         get {
             return playerHealth;
+        }
+    }
+
+    static public int Shield {
+        get {
+            return shield;
+        }
+
+        set {
+            shield = value;
         }
     }
 
@@ -52,6 +62,13 @@ public static class Globals
         score += scoreChange;
         EventManager.TriggerEvent(Message.CHANGE_SCORE);
     }
+
+    static public void BossEncounter(GameObject boss) {
+        Vector3 position = new Vector3(0.76f, 8.28f, 1);
+        GameObject.Instantiate(boss, position, Quaternion.identity);
+        EventManager.TriggerEvent(Message.BOSS_ENCOUNTER);
+    }
+
 
     static public void AddUpgrade(UpgradeData up) {
         upgrades.Add(up);

@@ -26,10 +26,14 @@ public class Player : MonoBehaviour
 
 	private void OnEnable() {
 		EventManager.StartListening(Message.UPGRADE_ADDED, UpdateStats);
+		EventManager.StartListening(Message.BOSS_ENCOUNTER, BossEncounter);
+		EventManager.StartListening(Message.GAME_OVER, GameOver);
 	}
 
 	private void OnDisable() {
 		EventManager.StopListening(Message.UPGRADE_ADDED, UpdateStats);		
+		EventManager.StopListening(Message.BOSS_ENCOUNTER, BossEncounter);		
+		EventManager.StopListening(Message.GAME_OVER, GameOver);		
 	}
 
     void Start()
@@ -42,6 +46,11 @@ public class Player : MonoBehaviour
 		Movement();
 		Shoot();
 		CheckHealth();
+		if (Globals.Shield > 0) {
+			GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
+		} else {
+			GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/player");
+		}
 	}
 
 	public void CheckHealth() {
@@ -99,7 +108,7 @@ public class Player : MonoBehaviour
 					//assign to correct variable
 					break;
 				case UpgradeType.SHIELD:
-					//assign to correct variable
+					Globals.Shield = 3;
 					break;
 				case UpgradeType.FIRE_RATE:
 					//assign to correct variable
@@ -113,5 +122,13 @@ public class Player : MonoBehaviour
 
 	void OnSceneLoaded() {
 		
+	}
+
+	public void GameOver() {
+		Destroy(this);
+	}
+
+	public void BossEncounter() {
+		Debug.Log("Starting Boss Encounter.");
 	}
 }

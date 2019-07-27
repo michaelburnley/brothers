@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a795d751bbe974a808cc7099631af0, type: 3}
   m_Name: level_1
   m_EditorClassIdentifier: 
-  scene_name: 
+  scene_name: An Angry Beginning
   scene_order: 0
   boss: {fileID: 0}
+  backgroundData: {fileID: 11400000, guid: b603a576fc6723e4fbc2c65f0876d841, type: 2}
   upgrades:
   - {fileID: 11400000, guid: ab58c3dc7fe33aa4ba0f19020fcfbca8, type: 2}
   - {fileID: 11400000, guid: 2cb9250b15119ca4abe4de3c7839de9c, type: 2}

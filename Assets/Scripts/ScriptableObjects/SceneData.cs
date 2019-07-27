@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine;
-
 [CreateAssetMenu(fileName = "New Scene", menuName = "Scene/Scene Data", order = 51)]
 public class SceneData : ScriptableObject {
 
@@ -15,6 +13,9 @@ public class SceneData : ScriptableObject {
 
     [SerializeField]
     private GameObject boss;
+
+    [SerializeField]
+    private BackgroundData backgroundData;
     
     [SerializeField]
     private UpgradeData[] upgrades = new UpgradeData[3];
@@ -40,6 +41,12 @@ public class SceneData : ScriptableObject {
     public int SceneOrder {
         get {
             return scene_order;
+        }
+    }
+    
+    public BackgroundData Background {
+        get {
+            return backgroundData;
         }
     }
     

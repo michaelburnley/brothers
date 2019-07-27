@@ -11,9 +11,12 @@ public class Upgrade : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     [SerializeField]
     private Text upgradeText;
 
-    void Start()
+    private void Update()
     {
-        GetComponent<Image>().sprite = upgradeData.Icon;
+        if (upgradeData) {
+            GetComponent<Image>().sprite = upgradeData.Icon;
+            Debug.Log(upgradeData.Icon);
+        }
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData) {

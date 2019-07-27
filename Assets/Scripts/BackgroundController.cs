@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-  [SerializeField]
+  [HideInInspector]
   public BackgroundData backgroundData;
+
+  [SerializeField]
+  private GameObject sceneManager;
 
   private Rigidbody2D rb;
 
@@ -23,6 +26,7 @@ public class BackgroundController : MonoBehaviour
   }
 
   private void Start() {
+    backgroundData = sceneManager.GetComponent<SceneSwitch>().sceneData[Globals.Scene].Background;
     rb.velocity = new Vector2(0, -backgroundData.Speed);
     Globals.BackgroundSpeed = backgroundData.Speed;
   }
