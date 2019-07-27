@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
+    public SceneData[] sceneData;
+
     private int total_scenes;
+
     private void OnEnable() {
         EventManager.StartListening(Message.NEXT_SCENE, SceneSwitcher);
     }
@@ -15,7 +18,7 @@ public class SceneSwitch : MonoBehaviour
     }
 
     private void Awake() {
-        total_scenes = SceneManager.sceneCountInBuildSettings;
+        total_scenes = sceneData.Length;
     }
 
     private void SceneSwitcher () {

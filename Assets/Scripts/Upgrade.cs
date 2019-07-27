@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Upgrade : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
-    [SerializeField]
-    private UpgradeData upgradeData;
+    [HideInInspector]
+    public UpgradeData upgradeData;
     [SerializeField]
     private Text upgradeText;
 

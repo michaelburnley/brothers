@@ -6,4 +6,6 @@ public enum Message {
     UPGRADE_ADDED,
     EXIT_GAME,
     COUNTDOWN,
+    SHIELD_DAMAGE,
+    SHIELD_LOST,
 };

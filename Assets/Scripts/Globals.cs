@@ -6,11 +6,12 @@ public static class Globals
 {
 
     static private int score = 0;
-    static private int playerHealth = 1;
     static private int scene = 0;
     static private List<UpgradeData> upgrades = new List<UpgradeData>();
     static private bool countdown_active = false;
     static private float background_speed;
+    static private int playerHealth = 1 + upgrades.Count;
+    static private int shield = 0;
 
 
     static public int Score {
@@ -58,7 +59,14 @@ public static class Globals
     }
 
     static public void PlayerHealth(int healthChange) {
-        playerHealth += healthChange;
+        if (shield > 0) {
+            shield--;
+            EventManager.TriggerEvent(Message.SHIELD_DAMAGE);
+        } else if (upgrades.Count > 0) {
+           upgrades.RemoveAt(upgrades.Count - 1); 
+        } else {
+            playerHealth += healthChange;
+        }
         EventManager.TriggerEvent(Message.CHANGE_HEALTH);
     }
 
