@@ -25,13 +25,11 @@ public class Player : MonoBehaviour
 	public GameObject player_shield;
 
 	private void OnEnable() {
-		EventManager.StartListening(Message.UPGRADE_ADDED, UpdateStats);
 		EventManager.StartListening(Message.BOSS_ENCOUNTER, BossEncounter);
 		EventManager.StartListening(Message.GAME_OVER, GameOver);
 	}
 
-	private void OnDisable() {
-		EventManager.StopListening(Message.UPGRADE_ADDED, UpdateStats);		
+	private void OnDisable() {		
 		EventManager.StopListening(Message.BOSS_ENCOUNTER, BossEncounter);		
 		EventManager.StopListening(Message.GAME_OVER, GameOver);		
 	}
@@ -39,6 +37,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+		UpdateStats();
     }
 
 	public void Update()
@@ -97,7 +96,8 @@ public class Player : MonoBehaviour
 	}
 
 	public void UpdateStats() {
-		List<UpgradeData> upgrades = Globals.Upgrades;
+		Debug.Log("Processing upgrades.");
+		UpgradeData[] upgrades = Globals.Upgrades.ToArray();
 		foreach(UpgradeData up in upgrades) {
 			float mod = up.UpgradeValue;
 			switch (up.ModType) {

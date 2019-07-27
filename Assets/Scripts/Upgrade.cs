@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Upgrade : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
@@ -30,6 +31,7 @@ public class Upgrade : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData pointerEventData) {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Globals.AddUpgrade(upgradeData);
         Debug.Log("Added upgrade.");
     }
