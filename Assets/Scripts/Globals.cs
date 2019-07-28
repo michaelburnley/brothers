@@ -47,8 +47,7 @@ public static class Globals
     }
 
     static public void BossEncounter(GameObject boss) {
-        Vector3 boss_position = new Vector3(0.76f, 8.28f, -1.1f);
-        GameObject.Instantiate(boss, position, Quaternion.identity);
+        GameObject.Instantiate(boss, boss_position, Quaternion.identity);
         EventManager.TriggerEvent(Message.BOSS_ENCOUNTER);
     }
 

@@ -10,7 +10,7 @@ public class PlayerState
     private int health = 1;
     private int shield = 0;
     private int missile = 0;
-    private float speed = 100f;
+    private float speed = 50;
     private float max_speed = 200f;
 	private float acceleration = 10f;
 	private float deceleration = 5f;
@@ -29,6 +29,10 @@ public class PlayerState
     public float Speed {
         get {
             return speed;
+        }
+
+        set {
+            speed = value;
         }
     }
 
@@ -85,7 +89,7 @@ public class PlayerState
     }
 
     public List<State> States(State updated_state) {
-
+        return states;
     }
 
     public List<UpgradeData> Upgrades() {

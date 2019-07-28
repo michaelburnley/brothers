@@ -43,11 +43,7 @@ public class Player : MonoBehaviour
 		Movement();
 		Shoot();
 		CheckHealth();
-		if (state.Shield == 3) {
-			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
-		} else if (state.Shield == 2) {
-			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
-		} else if (state.Shield == 1) {
+		if (state.Shield > 0) {
 			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
 		} else {
 			renderer.sprite = Resources.Load<Sprite>("Sprites/player");
@@ -110,6 +106,7 @@ public class Player : MonoBehaviour
 					break;
 				case UpgradeType.SHIELD:
 					state.Shield = (int)modValue;
+					Debug.Log(state.Shield);
 					break;
 				case UpgradeType.FIRE_RATE:
 					state.FireRate = modValue;

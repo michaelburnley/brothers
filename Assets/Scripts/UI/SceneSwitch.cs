@@ -26,7 +26,7 @@ public class SceneSwitch : MonoBehaviour
 
     private void Update() {
         if (enemies) {
-            if (enemies.transform.childCount == 0 && Globals.Health > 0 && bossCreated == false) {
+            if (enemies.transform.childCount == 0 && Globals.state.Health > 0 && bossCreated == false) {
                 Globals.BossEncounter(sceneData[Globals.Scene].Boss);
                 bossCreated = true;
             }

@@ -13,7 +13,7 @@ public class UpgradeList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        upgrades = Globals.Upgrades.ToArray();
+        upgrades = Globals.state.Upgrades().ToArray();
         processUpgrades();
     }
 
