@@ -7,16 +7,22 @@ public class BulletHandler : MonoBehaviour
     [SerializeField]
     private ProjectileData projectileData;
 
-    public int GetBulletDamage() {
-        return projectileData.Damage;
+    public int Damage {
+        get {
+            return projectileData.Damage;
+        }
     }
 
-    public float GetSpeed() {
-        return projectileData.Speed;
+    public float Speed {
+        get {
+            return projectileData.Speed;
+        }
     }
 
-    public float GetCooldown() {
-        return projectileData.Cooldown;
+    public float Cooldown {
+        get {
+            return projectileData.Cooldown;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {

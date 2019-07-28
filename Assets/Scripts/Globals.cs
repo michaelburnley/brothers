@@ -4,41 +4,23 @@ using UnityEngine;
 
 public static class Globals
 {
-
+    static public List<PlayerState> states = new List<PlayerState>();
+    static public PlayerState state = new PlayerState();
     static private int score = 0;
     static private int scene = 0;
-    static private List<UpgradeData> upgrades = new List<UpgradeData>();
     static private bool countdown_active = false;
     static private float background_speed;
-    static private int playerHealth = 1;
-    static private int shield = 0;
+    static private Vector3 boss_position = new Vector3(0.76f, 8.28f, -1.1f);
 
+    static public PlayerState State {
+        get {
+            return state;
+        }
+    } 
 
     static public int Score {
         get {
             return score;
-        }
-    }
-
-    static public int Health {
-        get {
-            return playerHealth;
-        }
-    }
-
-    static public int Shield {
-        get {
-            return shield;
-        }
-
-        set {
-            shield = value;
-        }
-    }
-
-    static public List<UpgradeData> Upgrades {
-        get {
-            return upgrades;
         }
     }
 
@@ -49,14 +31,15 @@ public static class Globals
     }
 
     static public float BackgroundSpeed {
-        set {
-            background_speed = value;
-        }
-
         get {
             return background_speed;
         }
+        
+        set {
+            background_speed = value;
+        }
     }
+
 
     static public void ChangeScore(int scoreChange) {
         score += scoreChange;
@@ -64,25 +47,27 @@ public static class Globals
     }
 
     static public void BossEncounter(GameObject boss) {
-        Vector3 position = new Vector3(0.76f, 8.28f, -1.1f);
+        Vector3 boss_position = new Vector3(0.76f, 8.28f, -1.1f);
         GameObject.Instantiate(boss, position, Quaternion.identity);
         EventManager.TriggerEvent(Message.BOSS_ENCOUNTER);
     }
 
 
     static public void AddUpgrade(UpgradeData up) {
-        upgrades.Add(up);
+        state.Upgrades(up);
         EventManager.TriggerEvent(Message.UPGRADE_ADDED);
     }
 
     static public void PlayerHealth(int healthChange) {
-        if (shield > 0) {
-            shield--;
+        int upgrade_count = state.Upgrades().Count;
+
+        if (state.Shield > 0) {
+            state.Shield = state.Shield - 1;
             EventManager.TriggerEvent(Message.SHIELD_DAMAGE);
-        } else if (upgrades.Count > 0) {
-           upgrades.RemoveAt(upgrades.Count - 1); 
+        } else if (upgrade_count > 0) {
+            state.Downgrade();
         } else {
-            playerHealth += healthChange;
+            state.Health = state.Health - 1;
         }
         EventManager.TriggerEvent(Message.CHANGE_HEALTH);
     }

@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
 
         if (collision.collider.tag == "projectile") {
             BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
-            int damage = bullet.GetBulletDamage();
+            int damage = bullet.Damage;
             health -= damage;
             Destroy(collision.collider.gameObject);
         }

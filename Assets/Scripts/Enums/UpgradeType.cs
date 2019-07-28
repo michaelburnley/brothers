@@ -2,5 +2,6 @@
         SPEED,
         HEALTH,
         SHIELD,
-        FIRE_RATE
+        FIRE_RATE,
+        MISSILE
 }

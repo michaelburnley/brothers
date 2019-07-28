@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21593c2f2ad08b44388ab8df7101b183, type: 3}
-  m_Name: Shield
+  m_Name: Missile
   m_EditorClassIdentifier: 
-  upgradeName: Shield
+  upgradeName: Missile
   cost: 10
   rarity: 10
-  icon: {fileID: 21300000, guid: 1e74c340eac93334b97e31793b6c7816, type: 3}
-  description: Takes damage in place of you. Looks cool.
-  upgradeType: 2
+  icon: {fileID: 21300000, guid: 032b75c891c5f00478d8b9902d7631eb, type: 3}
+  description: Makes a big bang. You can destroy stuff with them.
+  upgradeType: 4
   upgradeValue: 3

@@ -5,24 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-
-	public float speed = 100f;
-	public float max_speed = 200f;
-	public float acceleration = 10f;
-	public float deceleration = 5f;
-
 	public float mod_speed = 0f;
 	public float mod_max_speed = 0f;
 	public float mod_acceleration = 0f;
 	public float mod_deceleration = 0f;
 
 	private Rigidbody2D rb;
+	private SpriteRenderer renderer;
+
 	public GameObject player_bullet;
-	public float bullet_speed;
 	public GameObject player_missile;
-	public int missile_qty;
+	public float bullet_speed;
 	private float next_fire;
-	public GameObject player_shield;
+	private PlayerState state;
 
 	private void OnEnable() {
 		EventManager.StartListening(Message.BOSS_ENCOUNTER, BossEncounter);
@@ -36,24 +31,31 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        state = Globals.State;
+		renderer = GetComponent<SpriteRenderer>();
+		rb = this.GetComponent<Rigidbody2D>();
 		UpdateStats();
     }
 
 	public void Update()
 	{
+		state = Globals.State;
 		Movement();
 		Shoot();
 		CheckHealth();
-		if (Globals.Shield > 0) {
-			GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
+		if (state.Shield == 3) {
+			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
+		} else if (state.Shield == 2) {
+			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
+		} else if (state.Shield == 1) {
+			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
 		} else {
-			GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/player");
+			renderer.sprite = Resources.Load<Sprite>("Sprites/player");
 		}
 	}
 
 	public void CheckHealth() {
-		if (Globals.Health <= 0) {
+		if (state.Health <= 0) {
 			Globals.GameOver();
 		}
 	}
@@ -64,24 +66,24 @@ public class Player : MonoBehaviour
 
 	    Vector3 tempVect = new Vector3(h, v, 0);
 
-	    tempVect = tempVect.normalized * speed * Time.deltaTime;
+	    tempVect = tempVect.normalized * state.Speed * Time.deltaTime;
 	    rb.MovePosition(rb.transform.position + tempVect);
 	}
 
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject instantiatedBullet = Utilities.Create(player_bullet, this.gameObject);
-			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().GetSpeed();
+			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().Speed;
 			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed, 0);
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
-			if (missile_qty > 0 && Time.time > next_fire) {
-				float cooldown = player_missile.GetComponent<BulletHandler>().GetCooldown();
+			if (state.Missile > 0 && Time.time > next_fire) {
+				float cooldown = player_missile.GetComponent<BulletHandler>().Cooldown;
 				next_fire = Time.time + cooldown;
-				missile_qty--;
+				state.Missile = state.Missile - 1;
 				GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
-				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().GetSpeed();
+				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().Speed;
 				instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed * 10, 0);
 			}
 		}
@@ -90,38 +92,35 @@ public class Player : MonoBehaviour
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "projectile") {
 			BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
-			int damage = bullet.GetBulletDamage();
-			Globals.PlayerHealth(-damage);
+			state.Health = state.Health - bullet.Damage;
 		}
 	}
 
 	public void UpdateStats() {
 		Debug.Log("Processing upgrades.");
-		UpgradeData[] upgrades = Globals.Upgrades.ToArray();
+		UpgradeData[] upgrades = state.Upgrades().ToArray();
 		foreach(UpgradeData up in upgrades) {
-			float mod = up.UpgradeValue;
+			float modValue = up.UpgradeValue;
 			switch (up.ModType) {
 				case UpgradeType.SPEED:
-					//assign to correct variable
+					state.Speed = modValue;
 					break;
 				case UpgradeType.HEALTH:
-					//assign to correct variable
+					state.Health = (int)modValue;
 					break;
 				case UpgradeType.SHIELD:
-					Globals.Shield = 3;
+					state.Shield = (int)modValue;
 					break;
 				case UpgradeType.FIRE_RATE:
-					//assign to correct variable
+					state.FireRate = modValue;
+					break;
+				case UpgradeType.MISSILE:
+					state.Missile = (int)modValue;
 					break;
 				default:
-					//assign to correct variable
 					break;
 			}
 		}
-	}
-
-	void OnSceneLoaded() {
-		
 	}
 
 	public void GameOver() {
