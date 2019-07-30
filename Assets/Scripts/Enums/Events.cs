@@ -8,5 +8,6 @@ public enum Message {
     COUNTDOWN,
     SHIELD_DAMAGE,
     SHIELD_LOST,
-    BOSS_ENCOUNTER
+    BOSS_ENCOUNTER,
+    DROP_UPGRADE,
 };

@@ -20,3 +20,23 @@ static public class Utilities
     }
 
 }
+
+static class Extensions {
+    public static T Pop<T>(this List<T> list) {
+        int index = list.Count - 1;
+        T r = list[index];
+        list.RemoveAt(index);
+        return r;
+    }
+
+    public static T Pop<T>(this List<T> list, int index) {
+        T r = list[index];
+        list.RemoveAt(index);
+        return r;
+    }
+
+    public static List<T> Unshift<T>(this List<T> list, T item) {
+        list.Insert(0, item);
+        return list;
+    }
+}

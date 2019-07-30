@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	public float mod_acceleration = 0f;
 	public float mod_deceleration = 0f;
 
+	// Bubble the upgrade to get it back
+
 	private Rigidbody2D rb;
 	private SpriteRenderer renderer;
 
@@ -126,5 +128,11 @@ public class Player : MonoBehaviour
 
 	public void BossEncounter() {
 		Debug.Log("Starting Boss Encounter.");
+	}
+
+	public void CreateBubble() {
+		UpgradeData lostUpgrade = Globals.DropUpgrade(); 
+		GameObject bubble = GameObject.Instantiate(Resource.Load("Upgrade/bubble"), transform.position, transform.position);
+		bubble.GetComponent<UpgradeBubble>().SetDataObject(lostUpgrade);
 	}
 }

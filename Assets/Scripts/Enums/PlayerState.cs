@@ -101,9 +101,8 @@ public class PlayerState
         return upgrades;
     }
 
-    public List<UpgradeData> Downgrade() {
-        upgrades.RemoveAt(upgrades.Count - 1);
-        return upgrades;
+    public UpgradeData Downgrade() {
+        return upgrades.Pop();
     }
 
     public List<State> ChangeState(State updated_state) {

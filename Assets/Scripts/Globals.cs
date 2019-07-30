@@ -51,6 +51,11 @@ public static class Globals
         EventManager.TriggerEvent(Message.BOSS_ENCOUNTER);
     }
 
+    static public void DropUpgrade(UpgradeData up) {
+        state.Downgrade();
+        EventManager.TriggerEvent(Message.DROP_UPGRADE);
+    }
+
 
     static public void AddUpgrade(UpgradeData up) {
         state.Upgrades(up);
