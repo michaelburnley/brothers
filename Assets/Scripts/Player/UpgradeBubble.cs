@@ -8,7 +8,7 @@ public class UpgradeBubble : MonoBehaviour
     // Should bounce around screen for the the duration of the timer
     // Once timer is hit, bubble pops and the upgrade falls straight down
 
-    public float timer;
+    public float timer = 0;
     private UpgradeData upgradeData;
     private bool bubblePopped = false;
     private float timeToDestroy = 10f;
@@ -66,7 +66,9 @@ public class UpgradeBubble : MonoBehaviour
         Debug.Log("Play animation");
     }
 
-    public void SetDataObject(UpgradeData data) {
-        upgradeData = data;
+    public UpgradeData DataObject {
+        set {
+            upgradeData = value;
+        }
     }
 }

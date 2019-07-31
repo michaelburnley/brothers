@@ -14,11 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossName: The Baron
   health: 50
-  projectile: {fileID: 0}
+  projectile: {fileID: 4791179771934174773, guid: 2ed3755c00d559847bbd2a7356f3848e,
+    type: 3}
   upgrades: []
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 1cd21c529bf81274fb18600da88293dc, type: 3}
   score: 1000
-  bullet_speed: 0
-  bullet_occurence: 0
-  cooldown: 0
-  speechText: 
+  bullet_speed: 10
+  bullet_occurence: 1
+  cooldown: 3
+  speechText: 'lakjsdlfkhkajshfkjhasf\n
+
+    asldfkjlaskjfdjklasdf\n
+
+    doknaddkf'

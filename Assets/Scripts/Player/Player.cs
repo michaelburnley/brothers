@@ -116,8 +116,6 @@ public class Player : MonoBehaviour
 				case UpgradeType.MISSILE:
 					state.Missile = (int)modValue;
 					break;
-				default:
-					break;
 			}
 		}
 	}
@@ -132,7 +130,7 @@ public class Player : MonoBehaviour
 
 	public void CreateBubble() {
 		UpgradeData lostUpgrade = Globals.DropUpgrade(); 
-		GameObject bubble = GameObject.Instantiate(Resource.Load("Upgrade/bubble"), transform.position, transform.position);
-		bubble.GetComponent<UpgradeBubble>().SetDataObject(lostUpgrade);
+		GameObject bubble = GameObject.Instantiate(Resources.Load("Prefabs/Upgrade/UpgradeBubble") as GameObject, transform.position, Quaternion.identity);
+		bubble.GetComponent<UpgradeBubble>().DataObject = lostUpgrade;
 	}
 }

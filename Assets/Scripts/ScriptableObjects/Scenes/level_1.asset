@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene_name: An Angry Beginning
   scene_order: 0
-  boss: {fileID: 2695338625521639775, guid: 6108dbf8b963e974fb40441ef063b8ef, type: 3}
+  boss: {fileID: 2098744073372561889, guid: 3232c1cb00edeee4b82687418b8c573f, type: 3}
   backgroundData: {fileID: 11400000, guid: b603a576fc6723e4fbc2c65f0876d841, type: 2}
   upgrades:
   - {fileID: 11400000, guid: ab58c3dc7fe33aa4ba0f19020fcfbca8, type: 2}
