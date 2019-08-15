@@ -9,7 +9,7 @@ public class PlayerState
 
     private int health = 1;
     private int shield = 0;
-    private int missile = 0;
+    private int missile = 3;
     private float speed = 50;
     private float max_speed = 200f;
 	private float acceleration = 10f;

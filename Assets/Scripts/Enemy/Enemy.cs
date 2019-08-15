@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.collider.tag == "player") {
-            Globals.PlayerHealth(-1);
+            Globals.PlayerHealth();
             Globals.GameOver();
             Destroy(this.gameObject);
         }
@@ -80,7 +80,8 @@ public class Enemy : MonoBehaviour
         if (timer > enemyData.BulletOccurence) {
             GameObject instantiatedProjectile = Instantiate(enemyData.Projectile, (transform.position + new Vector3(0, -2, 0)), transform.rotation);
 			instantiatedProjectile.GetComponent<SpriteRenderer>().flipY = true;
-			instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, enemyData.DirectionY, 0);
+            Utilities.SetProjectileSpeed(instantiatedProjectile, new Vector3(0, enemyData.DirectionY, 0));
+			// instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, enemyData.DirectionY, 0);
             timer = 0;
         }
     }

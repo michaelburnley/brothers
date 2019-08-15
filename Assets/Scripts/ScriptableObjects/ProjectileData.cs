@@ -16,7 +16,7 @@ public class ProjectileData : ScriptableObject
     [SerializeField]
     private Sprite icon;
     [SerializeField]
-    private Animator animation;
+    private AnimationClip clip;
     // Start is called before the first frame update
 
     public int Damage {
@@ -39,9 +39,10 @@ public class ProjectileData : ScriptableObject
             return icon;
         }
     }
-    public Animator Animation {
+
+    public AnimationClip Clip {
         get {
-            return animation;
+            return clip;
         }
     }
 }

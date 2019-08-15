@@ -62,7 +62,7 @@ public static class Globals
         EventManager.TriggerEvent(Message.UPGRADE_ADDED);
     }
 
-    static public void PlayerHealth(int healthChange) {
+    static public void PlayerHealth() {
         int upgrade_count = state.Upgrades().Count;
 
         if (state.Shield > 0) {

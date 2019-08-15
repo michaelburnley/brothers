@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5202751986931590040}
   - component: {fileID: 2421822952811135391}
   - component: {fileID: 6417054247579931868}
+  - component: {fileID: 5771079997408059388}
   m_Layer: 11
   m_Name: bullet
   m_TagString: projectile
@@ -116,8 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 8b7edfcc7cbcdcf45aeafdb5bb9f9d24, type: 2}
-  speed: 0
-  cooldown: 0
 --- !u!61 &6417054247579931868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,3 +143,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.125, y: 0.16}
   m_EdgeRadius: 0
+--- !u!111 &5771079997408059388
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791179771934174773}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

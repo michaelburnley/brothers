@@ -14,12 +14,15 @@ public class Player : MonoBehaviour
 
 	private Rigidbody2D rb;
 	private SpriteRenderer renderer;
+	private Animator animator;
 
 	public GameObject player_bullet;
 	public GameObject player_missile;
 	public float bullet_speed;
 	private float next_fire;
 	private PlayerState state;
+	private GameObject gun;
+	private bool isDead = false;
 
 	private void OnEnable() {
 		EventManager.StartListening(Message.BOSS_ENCOUNTER, BossEncounter);
@@ -35,21 +38,21 @@ public class Player : MonoBehaviour
     {
         state = Globals.State;
 		renderer = GetComponent<SpriteRenderer>();
-		rb = this.GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
+		gun = gameObject.transform.GetChild(0).gameObject;
 		UpdateStats();
     }
 
 	public void Update()
 	{
 		state = Globals.State;
-		Movement();
+		if (!isDead) {
+			Movement();
+		}
 		Shoot();
 		CheckHealth();
-		if (state.Shield > 0) {
-			renderer.sprite = Resources.Load<Sprite>("Sprites/player_with_shield");
-		} else {
-			renderer.sprite = Resources.Load<Sprite>("Sprites/player");
-		}
+		animator.SetInteger("shield", state.Shield);		
 	}
 
 	public void CheckHealth() {
@@ -70,9 +73,9 @@ public class Player : MonoBehaviour
 
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
-			GameObject instantiatedBullet = Utilities.Create(player_bullet, this.gameObject);
+			GameObject instantiatedBullet = Utilities.Create(player_bullet, gameObject);
 			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().Speed;
-			instantiatedBullet.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed, 0);
+			Utilities.SetProjectileSpeed(instantiatedBullet, new Vector3(0, projectile_speed, 0));
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
@@ -82,7 +85,7 @@ public class Player : MonoBehaviour
 				state.Missile = state.Missile - 1;
 				GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
 				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().Speed;
-				instantiatedMissile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectile_speed * 10, 0);
+				Utilities.SetProjectileSpeed(instantiatedMissile, new Vector3(0, projectile_speed * 10, 0));
 			}
 		}
 	}
@@ -90,7 +93,7 @@ public class Player : MonoBehaviour
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "projectile") {
 			BulletHandler bullet = collision.collider.gameObject.GetComponent<BulletHandler>();
-			state.Health = state.Health - bullet.Damage;
+			Globals.PlayerHealth();
 		}
 	}
 
@@ -121,7 +124,8 @@ public class Player : MonoBehaviour
 	}
 
 	public void GameOver() {
-		Destroy(this);
+		isDead = true;
+		animator.SetBool("dead", true);
 	}
 
 	public void BossEncounter() {
