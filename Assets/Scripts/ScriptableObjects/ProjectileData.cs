@@ -16,7 +16,7 @@ public class ProjectileData : ScriptableObject
     [SerializeField]
     private Sprite icon;
     [SerializeField]
-    private AnimationClip clip;
+    private RuntimeAnimatorController animation;
     // Start is called before the first frame update
 
     public int Damage {
@@ -40,9 +40,9 @@ public class ProjectileData : ScriptableObject
         }
     }
 
-    public AnimationClip Clip {
+    public RuntimeAnimatorController Animation {
         get {
-            return clip;
+            return animation;
         }
     }
 }

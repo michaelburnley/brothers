@@ -79,9 +79,8 @@ public class Enemy : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > enemyData.BulletOccurence) {
             GameObject instantiatedProjectile = Instantiate(enemyData.Projectile, (transform.position + new Vector3(0, -2, 0)), transform.rotation);
-			instantiatedProjectile.GetComponent<SpriteRenderer>().flipY = true;
-            Utilities.SetProjectileSpeed(instantiatedProjectile, new Vector3(0, enemyData.DirectionY, 0));
-			// instantiatedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, enemyData.DirectionY, 0);
+            instantiatedProjectile.transform.Rotate(0, 0, 180f);
+            instantiatedProjectile.GetComponent<BulletHandler>().spawner = gameObject;
             timer = 0;
         }
     }

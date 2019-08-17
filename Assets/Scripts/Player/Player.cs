@@ -74,8 +74,7 @@ public class Player : MonoBehaviour
 	public void Shoot() {
 		if (Input.GetButtonDown("Fire1")) {
 			GameObject instantiatedBullet = Utilities.Create(player_bullet, gameObject);
-			float projectile_speed = instantiatedBullet.GetComponent<BulletHandler>().Speed;
-			Utilities.SetProjectileSpeed(instantiatedBullet, new Vector3(0, projectile_speed, 0));
+			instantiatedBullet.GetComponent<BulletHandler>().spawner = gameObject;
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
@@ -83,9 +82,10 @@ public class Player : MonoBehaviour
 				float cooldown = player_missile.GetComponent<BulletHandler>().Cooldown;
 				next_fire = Time.time + cooldown;
 				state.Missile = state.Missile - 1;
-				GameObject instantiatedMissile = Utilities.Create(player_missile, this.gameObject);
-				float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().Speed;
-				Utilities.SetProjectileSpeed(instantiatedMissile, new Vector3(0, projectile_speed * 10, 0));
+				GameObject instantiatedMissile = Utilities.Create(player_missile, gameObject);
+				instantiatedMissile.GetComponent<BulletHandler>().spawner = gameObject;
+				// float projectile_speed = instantiatedMissile.GetComponent<BulletHandler>().Speed;
+				// Utilities.SetProjectileSpeed(instantiatedMissile, new Vector3(0, projectile_speed * 10, 0));
 			}
 		}
 	}
